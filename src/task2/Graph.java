@@ -17,58 +17,58 @@ public class Graph {
     private static final int NUMBER_OF_CITIES = 10000;
 
     public void graph(File file) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String line = br.readLine();
-        int source = Integer.parseInt(line);
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        String readLine = bufferedReader.readLine();
+        int source = Integer.parseInt(readLine);
 
-        for (int testIndex = 0; testIndex < source; testIndex++) {
-            String[] citiesInd = new String[NUMBER_OF_CITIES];
-            line = br.readLine();
-            int countCities = Integer.parseInt(line);
+        for (int i = 0; i < source; i++) {
+            String[] citiesIndex = new String[NUMBER_OF_CITIES];
+            readLine = bufferedReader.readLine();
+            int countCities = Integer.parseInt(readLine);
             int matrixSize = countCities + 1;
             Matrix matrix = new Matrix(matrixSize);
 
-            for (int cityIndex = 0; cityIndex < countCities; cityIndex++) {
-                line = br.readLine();
-                String cityName = line;
-                citiesInd[cityIndex] = cityName;
-                line = br.readLine();
-                int p = Integer.parseInt(line);
+            for (int j = 0; j < countCities; j++) {
+                readLine = bufferedReader.readLine();
+                String cityName = readLine;
+                citiesIndex[j] = cityName;
+                readLine = bufferedReader.readLine();
+                int p = Integer.parseInt(readLine);
 
-                for (int neighborIndex = 0; neighborIndex < p; neighborIndex++) {
-                    line = br.readLine();
-                    String[] brokenLine = line.split(" ");
+                for (int k = 0; k < p; k++) {
+                    readLine = bufferedReader.readLine();
+                    String[] brokenLine = readLine.split(" ");
                     int cityToConnect = Integer.parseInt(brokenLine[0]);
                     int weightOfConnection = Integer.parseInt(brokenLine[1]);
-                    matrix.setEdge(cityIndex, cityToConnect, weightOfConnection);
+                    matrix.setEdge(j, cityToConnect, weightOfConnection);
                 }
             }
-            line = br.readLine();
-            int routesToFind = Integer.parseInt(line);
-            for (int routesIndex = 0; routesIndex < routesToFind; routesIndex++) {
-                line = br.readLine();
-                String[] cityNames = line.split(" ");
+            readLine = bufferedReader.readLine();
+            int routesToFind = Integer.parseInt(readLine);
+            for (int q = 0; q < routesToFind; q++) {
+                readLine = bufferedReader.readLine();
+                String[] cityNames = readLine.split(" ");
                 String start = cityNames[0];
                 String destination = cityNames[1];
                 List<String> list = new ArrayList<>();
 
-                for (String s : citiesInd) {
+                for (String s : citiesIndex) {
                     if (s != null) {
                         list.add(s);
                     }
                 }
 
-                citiesInd = list.toArray(new String[0]);
+                citiesIndex = list.toArray(new String[0]);
                 int startIndex = 0;
                 int destinationIndex = 0;
-                for (int i = 0; i < citiesInd.length; i++)
-                    if (start.equals(citiesInd[i])) {
-                        startIndex = i;
+                for (int m = 0; m < citiesIndex.length; m++)
+                    if (start.equals(citiesIndex[m])) {
+                        startIndex = m;
                         break;
                     }
-                for (int i = 0; i < citiesInd.length; i++) {
-                    if (destination.equals(citiesInd[i])) {
-                        destinationIndex = i;
+                for (int m = 0; m < citiesIndex.length; m++) {
+                    if (destination.equals(citiesIndex[m])) {
+                        destinationIndex = m;
                         break;
                     }
                 }
@@ -77,6 +77,6 @@ public class Graph {
                 System.out.println(destinationDistance);
             }
         }
-        br.close();
+        bufferedReader.close();
     }
 }
